@@ -10,7 +10,7 @@ function getComputerChoice(){
         computer_choice = "scissors";
     }
 
-    console.log(computer_choice);
+    console.log(`The computer chose ${computer_choice}`);
     return computer_choice
 }
 
@@ -18,7 +18,7 @@ function getHumanChoice(){
     let human_choice = prompt("Pick rock, paper, or scissors.");
     human_choice = human_choice.toLocaleLowerCase();
 
-    console.log(human_choice);
+    console.log(`You chose ${human_choice}`);
     return human_choice
 }
 
@@ -70,9 +70,9 @@ let human_score = 0;
 let counter = 0;
 
 while (counter < 3){
-    let human_choice = getHumanChoice();
-    let computer_choice = getComputerChoice();
-    playRound(human_choice,computer_choice);
+    let human_selection = getHumanChoice();
+    let computer_selection = getComputerChoice();
+    playRound(human_selection,computer_selection);
     counter++;
 }
 
