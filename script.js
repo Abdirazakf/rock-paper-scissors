@@ -65,15 +65,19 @@ function playRound(human_choice, computer_choice){
     }
 }
 
-let computer_score = 0;
-let human_score = 0;
-let counter = 0;
-
-while (counter < 3){
-    let human_selection = getHumanChoice();
-    let computer_selection = getComputerChoice();
-    playRound(human_selection,computer_selection);
-    counter++;
+function playGame(human_score, computer_score){
+    let counter = 0;
+    
+    while (counter < 5){
+        let human_selection = getHumanChoice();
+        let computer_selection = getComputerChoice();
+        playRound(human_selection,computer_selection);
+        counter++;
+    }
 }
 
+let computer_score = 0;
+let human_score = 0;
+
+playGame(human_score, computer_score);
 console.log(`Final score: \n\nHuman Score: ${human_score} \nComputer Score: ${computer_score}`);
