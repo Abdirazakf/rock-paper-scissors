@@ -10,19 +10,18 @@ function getComputerChoice(){
         computer_choice = "scissors";
     }
 
-    console.log(`The computer chose ${computer_choice}`);
     return computer_choice
 }
 
-function getHumanChoice(){
-    let human_choice = prompt("Pick rock, paper, or scissors.");
-    human_choice = human_choice.toLocaleLowerCase();
-
-    console.log(`You chose ${human_choice}`);
-    return human_choice
-}
+// function getHumanChoice(){
+//     console.log(`You chose ${human_choice}`);
+//     return human_choice
+// }
 
 function playRound(human_choice, computer_choice){
+    console.log(`\nYou chose ${human_choice}`);
+    console.log(`The computer chose ${computer_choice}`);
+
     switch(human_choice){
         case "rock":
             if (computer_choice === "rock"){
@@ -56,7 +55,7 @@ function playRound(human_choice, computer_choice){
                 console.log("You win! Scissors beats Paper");
                 human_score++;
             } else {
-                console.log("It's a draw!");;
+                console.log("It's a draw!");
             }
             break;
         
@@ -65,19 +64,30 @@ function playRound(human_choice, computer_choice){
     }
 }
 
-function playGame(human_score, computer_score){
-    let counter = 0;
-    
-    while (counter < 5){
-        let human_selection = getHumanChoice();
-        let computer_selection = getComputerChoice();
-        playRound(human_selection,computer_selection);
-        counter++;
-    }
+function playGame(){
+    let computer_selection = getComputerChoice();
+    playRound(human_choice,computer_selection);
+    console.log(`Score: \n\nHuman Score: ${human_score} \nComputer Score: ${computer_score}`);
 }
 
+let human_choice = "";
+const rock = document.querySelector("#rock")
+const paper = document.querySelector("#paper")
+const scissors = document.querySelector("#scissors")
 let computer_score = 0;
 let human_score = 0;
 
-playGame(human_score, computer_score);
-console.log(`Final score: \n\nHuman Score: ${human_score} \nComputer Score: ${computer_score}`);
+rock.addEventListener("click", () => {
+    human_choice = "rock"
+    playGame(human_score, computer_score);
+})
+
+paper.addEventListener("click", () => {
+    human_choice = "paper"
+    playGame(human_score, computer_score);
+})
+
+scissors.addEventListener("click", () => {
+    human_choice = "scissors"
+    playGame(human_score, computer_score);
+})
