@@ -13,15 +13,10 @@ function getComputerChoice(){
     return computer_choice
 }
 
-// function getHumanChoice(){
-//     console.log(`You chose ${human_choice}`);
-//     return human_choice
-// }
-
 function playRound(human_choice, computer_choice){
     console.log(`\nYou chose ${human_choice}`);
     console.log(`The computer chose ${computer_choice}`);
-
+    
     switch(human_choice){
         case "rock":
             if (computer_choice === "rock"){
@@ -58,36 +53,52 @@ function playRound(human_choice, computer_choice){
                 console.log("It's a draw!");
             }
             break;
-        
-        default:
-            console.log("Invalid input, Try again");
     }
 }
 
 function playGame(){
     let computer_selection = getComputerChoice();
     playRound(human_choice,computer_selection);
-    console.log(`Score: \n\nHuman Score: ${human_score} \nComputer Score: ${computer_score}`);
+    if (human_score == 5){
+        console.log("You Won!")
+        scoreLine.textContent = `Final score: Player (${human_score}) Computer (${computer_score}), You Win!`
+    } else if (computer_score == 5){
+        console.log("You Lost :(")
+        scoreLine.textContent = `Final score: Player (${human_score}) Computer (${computer_score}), You Lose :(`
+    }
 }
 
 let human_choice = "";
 const rock = document.querySelector("#rock")
 const paper = document.querySelector("#paper")
 const scissors = document.querySelector("#scissors")
+const statBox = document.querySelector("#stats")
 let computer_score = 0;
 let human_score = 0;
 
 rock.addEventListener("click", () => {
     human_choice = "rock"
-    playGame(human_score, computer_score);
+    if (human_score < 5 && computer_score < 5){
+      playGame(human_score, computer_score);      
+    }
 })
 
 paper.addEventListener("click", () => {
     human_choice = "paper"
-    playGame(human_score, computer_score);
+    if (human_score < 5 && computer_score < 5){
+      playGame(human_score, computer_score);      
+    }
 })
 
 scissors.addEventListener("click", () => {
     human_choice = "scissors"
-    playGame(human_score, computer_score);
+    if (human_score < 5 && computer_score < 5){
+      playGame(human_score, computer_score);  
+    }
 })
+
+const scoreLine = document.createElement("div")
+const playAgainButton = document.createElement("button")
+playAgainButton.setAttribute("class", "again-button")
+scoreLine.setAttribute("class", "score")
+statBox.appendChild(scoreLine)
