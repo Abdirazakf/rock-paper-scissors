@@ -15,30 +15,37 @@ function getComputerChoice(){
 
 function playRound(human_choice, computer_choice){
     console.log(`\nYou chose ${human_choice}`);
-    console.log(`The computer chose ${computer_choice}`);
+    computer.textContent = `The computer chose ${computer_choice}`
     
     switch(human_choice){
         case "rock":
             if (computer_choice === "rock"){
-                console.log("It's a draw!");
+                resultLine.textContent = "It's a draw!"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             } else if (computer_choice === "paper"){
-                console.log("You lose! Paper beats Rock");
                 computer_score++;
+                resultLine.textContent = "You lose! Paper beats Rock"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             } else {
-                console.log("You win! Rock beats Scissors");
                 human_score++;
+                resultLine.textContent = "You win! Rock beats Scissors"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             }
             break;
 
         case "paper":
             if (computer_choice === "rock"){
-                console.log("You win! Paper beats Rock");
                 human_score++;
+                resultLine.textContent = "You win! Paper beats Rock"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             } else if (computer_choice === "paper"){
                 console.log("It's a draw!");
+                resultLine.textContent = "It's a draw!"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             } else {
-                console.log("You lose! Scissors beats Paper");
                 computer_score++;
+                resultLine.textContent = "You lose! Scissors beats Paper"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             }
             break;
         
@@ -46,11 +53,17 @@ function playRound(human_choice, computer_choice){
             if (computer_choice === "rock"){
                 console.log("You lose! Rock beats Scissors");
                 computer_score++;
+                resultLine.textContent = "You lose! Rock beats Scissors"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             } else if (computer_choice === "paper"){
                 console.log("You win! Scissors beats Paper");
                 human_score++;
+                resultLine.textContent = "You win! Scissors beats Paper"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             } else {
                 console.log("It's a draw!");
+                resultLine.textContent = "It's a draw!"
+                scoreLine.textContent = `Player (${human_score}) Computer (${computer_score})`
             }
             break;
     }
@@ -60,11 +73,9 @@ function playGame(){
     let computer_selection = getComputerChoice();
     playRound(human_choice,computer_selection);
     if (human_score == 5){
-        console.log("You Won!")
-        scoreLine.textContent = `Final score: Player (${human_score}) Computer (${computer_score}), You Win!`
+        finalScore.textContent = `Final score: ${human_score}-${computer_score}, You Win!`
     } else if (computer_score == 5){
-        console.log("You Lost :(")
-        scoreLine.textContent = `Final score: Player (${human_score}) Computer (${computer_score}), You Lose :(`
+        finalScore.textContent = `Final score: ${human_score}-${computer_score}, You Lose :(`
     }
 }
 
@@ -73,8 +84,11 @@ const rock = document.querySelector("#rock")
 const paper = document.querySelector("#paper")
 const scissors = document.querySelector("#scissors")
 const statBox = document.querySelector("#stats")
+const computer = document.querySelector("#computer-choice")
 let computer_score = 0;
 let human_score = 0;
+
+computer.textContent = "What's the computer gonna chose???"
 
 rock.addEventListener("click", () => {
     human_choice = "rock"
@@ -97,8 +111,14 @@ scissors.addEventListener("click", () => {
     }
 })
 
+const resultLine = document.createElement("div")
 const scoreLine = document.createElement("div")
+const finalScore = document.createElement("div")
 const playAgainButton = document.createElement("button")
 playAgainButton.setAttribute("class", "again-button")
+resultLine.setAttribute("class", "score")
 scoreLine.setAttribute("class", "score")
+finalScore.setAttribute("class", "final")
+statBox.appendChild(resultLine)
 statBox.appendChild(scoreLine)
+statBox.appendChild(finalScore)
