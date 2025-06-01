@@ -14,7 +14,6 @@ function getComputerChoice(){
 }
 
 function playRound(human_choice, computer_choice){
-    console.log(`\nYou chose ${human_choice}`);
     computer.textContent = `The computer chose ${computer_choice}`
     
     switch(human_choice){
@@ -114,11 +113,23 @@ scissors.addEventListener("click", () => {
 const resultLine = document.createElement("div")
 const scoreLine = document.createElement("div")
 const finalScore = document.createElement("div")
-const playAgainButton = document.createElement("button")
-playAgainButton.setAttribute("class", "again-button")
+const playAgainButton = document.querySelector("#reset")
+
 resultLine.setAttribute("class", "score")
 scoreLine.setAttribute("class", "score")
 finalScore.setAttribute("class", "final")
 statBox.appendChild(resultLine)
 statBox.appendChild(scoreLine)
 statBox.appendChild(finalScore)
+
+playAgainButton.addEventListener("click", () => {
+    if (human_score == 5 || computer_score == 5){
+        human_score = 0
+        computer_score = 0
+
+        computer.textContent = "What's the computer gonna chose???"
+        resultLine.textContent = ""
+        scoreLine.textContent = ""
+        finalScore.textContent = ""
+    }
+})
